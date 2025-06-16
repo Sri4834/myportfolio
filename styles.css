@@ -1,0 +1,728 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  background: black;
+  color: #e7e7e7;
+  min-height: 100vh;
+  line-height: 1.5;
+  overflow: hidden;
+  position: relative;
+  font-size: 1rem; /* Revert base font size */
+  padding: 0; /* Revert body padding */
+}
+
+/* Center the image gradient and add slow rotation */
+.image-gradient {
+  position: absolute;
+  top: 90px;
+  /* left: 50%; */
+  transform: rotate(0deg);
+  filter: brightness(16);
+  width: 220%; /* Slightly zoomed in */
+  height: 220%; /* Slightly zoomed in */
+  opacity: 1;
+  /* z-index: 1; */
+  animation: rotateImage 7s linear infinite; /* Slow rotation */
+}
+
+@keyframes rotateImage {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+/* white glow on right */
+.layer-blur {
+  position: absolute;
+  top: 30%;
+  right: 0;
+  width: 25rem;
+  height: 0;
+  box-shadow: 0 0 800px 30px rgb(126, 126, 126);
+  transform: rotate(-40deg);
+  z-index: 999; /* Ensure it is above the video and gradient image */
+}
+
+
+.container {
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 1em;
+  position: relative;
+}
+
+/* header */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 4rem; /* Revert header padding */
+  z-index: 1;
+}
+
+
+nav {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+  /* remove your negative margin */
+  margin-left: 0;
+}
+
+nav a {
+  position: relative;
+  font-size: 1rem; /* Revert navigation link font size */
+  letter-spacing: 0.1rem;
+  text-decoration: none;
+  color: inherit;
+  transition: color 0.2s ease;
+  cursor: pointer;
+  z-index: 9999999;
+}
+
+nav a::after {
+  content: '';
+  position: absolute;
+  bottom: -2px; /* Position the underline slightly below the text */
+  left: 0;
+  width: 100%; /* Start with full width */
+  height: 2px; /* Thickness of the underline */
+  background-color: currentColor; /* Match the underline color to the text color */
+  opacity: 0; /* Initially invisible */
+  transition: opacity 0.3s ease;
+}
+
+nav a:hover::after {
+  opacity: 1; /* Fade in the underline on hover */
+}
+
+/* Redesigned the profile container for a dynamic rotating neon border */
+.profile-container {
+  position: relative;
+  width: 4rem; /* Revert profile container size */
+  height: 4rem;
+  border-radius: 50%; /* Ensure the container is circular */
+  overflow: hidden;
+  top: 12px;
+  left: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: black;
+  cursor: pointer;
+}
+
+/* Updated the neon border to use dazzling cyberpunk colors */
+.profile-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 50%;
+  padding: 6px; /* Border thickness */
+  background: linear-gradient(300deg, #ff007f, #ff00ff, #ffbf00, #007fff, #00ffff, #ff007f); /* Cyberpunk neon colors */
+  -webkit-mask: radial-gradient(circle, transparent 58%, rgba(255, 255, 255, 0.8) 60%, rgba(255, 255, 255, 1) 62%);
+  mask: radial-gradient(circle, transparent 58%, rgba(0, 0, 0, 0.8) 60%, rgba(0, 0, 0, 1) 62%);
+  background-size: 400% 400%;
+  animation: rotateNeon 6s linear infinite;
+}
+
+/* Keyframes for smoother rotating neon border */
+@keyframes rotateNeon {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Profile image styling */
+.profile-image {
+  width: 90%; /* Revert profile image size */
+  height: 90%;
+  object-fit: cover;
+  cursor: pointer;
+  border-radius: 50%;
+  z-index: 1; /* Ensure the image is above the border */
+}
+
+/* Keyframes for flowing neon colors */
+@keyframes flowNeon {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
+/* main content aligned left */
+main {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  min-height: calc(90vh - 6rem);
+  padding-left: 4%; /* Revert left padding */
+  padding-top: 6rem; /* Revert top padding */
+  gap: 2rem; /* Decreased the gap between the two parts */
+  position: relative;
+  top: 40px;
+}
+
+/* remove the extra margin on .content */
+.content {
+  max-width: 55%;
+  margin-left: 0;
+  top: 60px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Metallic Silver Border with Spotlight White Highlight for tag-box */
+.tag-box {
+  position: relative;
+  width: 12rem;
+  height: 2.5rem;
+  border-radius: 10px;
+  background-color: black; /* Keep the background black */
+  border: 3px solid;
+  border-image-source: linear-gradient(145deg, #d4d4d4, #f0f0f0, #ffffff);
+  border-image-slice: 1; /* Use the gradient as the border */
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.5); /* Spotlight white highlight */
+  overflow: hidden;
+}
+
+.tag-box .tag {
+  position: relative;
+  z-index: 2;
+}
+
+.tag-box p{
+  background-color: rgb(57, 57, 57);
+  color: rgb(230, 230, 230);
+  text-shadow: 2px #8000ff;
+}
+
+
+.tag{
+  font-size: 1.7rem;
+}
+.tag-box .tag {
+  position: absolute;
+  inset: 3px;
+  background-color: black;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+.tag-box .tag:hover {
+  background-color: #5300a0;
+  color: white;
+  transition: scaleY(0.01);
+}
+
+/* heading */
+.content h1 {
+  font-size: 2.5rem; /* Revert heading size */
+  font-weight: 700;
+  letter-spacing: 0.10em;
+  line-height: 1.3;
+  margin: 1.2rem 0; /* Adjusted margin */
+  text-shadow: 0 0 15px rgba(128, 128, 128, 0.5);
+}
+
+/* description */
+.description {
+  font-size: 1rem; /* Revert description font size */
+  letter-spacing: 0.0625em;
+  max-width: 35rem;
+  font-weight:300; letter-spacing: 0.25em;
+  color: #c5c4c4;
+}
+.buttons {
+  display: flex;
+  gap: 1.5rem; /* Revert gap between buttons */
+  margin-top: 1.1rem;
+}
+
+.linkedIN, .get-btn {
+  display: inline-flex; /* Use inline-flex to place them side by side */
+  align-items: center;
+  gap: 0.5rem; /* space between text and icon */
+  font-size: 1.08rem; /* Revert button font size */
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  padding: 0.6rem 1.2rem; /* Revert button padding */
+  border-radius: 50px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.linkedIN {
+  border: 1px solid #3a3a3a;
+  background-color: #dddbdb;
+  color: #085fea;
+}
+.linkedIN i {
+  color: #085fea;
+}
+
+.linkedIN:hover {
+  background-color: transparent;
+  color: white;
+}
+.linkedIN:hover i {
+  color: white;
+}
+
+.get-btn:hover i {
+  color: white;
+}
+
+.get-btn {
+  border: 1px solid #3a3a3a;
+  background-color: #dddbdb;
+}
+
+.get-btn:hover{
+  background-color: transparent;
+  color: white;
+}
+
+.linkedIN i,
+.get-btn i {
+  font-size: 1.5rem;
+}
+
+/* Adjusted overlay to ensure it appears over the page */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  visibility: hidden; /* Hidden by default */
+  opacity: 0;
+  transition: none; /* Disable transition for immediate closing */
+  z-index: 999999999;
+}
+
+/* Ensure the overlay becomes visible when active */
+.overlay.active {
+  visibility: visible;
+  opacity: 1;
+}
+
+.glass-container {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(6px); /* Glassmorphism effect */
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.icon-controls {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.icon-btn {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: white;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.icon-btn:hover {
+  color: #007bff;
+}
+
+.image-box {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 10px;
+  padding: 1rem;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.image-box img {
+  max-width: 100%;
+  max-height: 80vh;
+  border-radius: 5px;
+}
+
+.crop-controls {
+  margin-top: 1rem;
+  display: flex;
+  gap: 1rem;
+}
+
+.crop-controls button {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 5px;
+  background: #007bff;
+  color: white;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.crop-controls button:hover {
+  background: #0056b3;
+}
+
+#overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+#overlay .overlay-content {
+  display: flex;
+  flex-direction: row;
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  width: 80%;
+  max-width: 1000px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.25);
+}
+
+#crop-area {
+  flex: 2;
+  background-color: transparent;
+  border: none !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#buttons-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 15px;
+  padding-left: 20px;
+}
+
+#buttons-container button {
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+#buttons-container button:hover {
+  background-color: #0056b3;
+}
+
+#overlay .overlay-content {
+  background: rgba(20, 20, 20, 0.6);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+#buttons-container button {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  transition: all 0.3s ease;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+#buttons-container button:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: scale(1.05);
+  box-shadow: 0 4px 20px rgba(255, 255, 255, 0.2);
+}
+
+#buttons-container button:active {
+  transform: scale(0.95);
+  box-shadow: 0 2px 10px rgba(255, 255, 255, 0.1);
+}
+
+#overlay {
+  background: rgba(0, 0, 0, 0.75);
+}
+
+
+.robot-3D {
+  position: absolute;
+  top: 38%;
+  scale: 0.55;
+  right: -42%; /* Move it towards the right side */
+  z-index: 999;
+}
+
+.robot-shadow {
+  position: absolute;
+  border: 20px solid rgb(95, 95, 95);
+  top: 90%; /* Adjust to be under the robot legs */
+  right: 3%; /* Adjust horizontal position near robot */
+  width: 150px;
+  height: 40px;
+  background: rgba(0, 0, 0, 0.6);
+  filter: blur(20px);
+  border-radius: 50%;
+  z-index: 998; /* Just below the robot */
+  pointer-events: none; /* So it doesn't interfere with interactions */
+}
+
+  nav a {
+    font-size: 1rem; /* Revert font size for smaller screens */
+  }
+
+  main {
+    padding-left: 4%; /* Revert left padding for smaller screens */
+    padding-top: 6rem; /* Revert top padding for smaller screens */
+  }
+
+  .content h1 {
+    font-size: 2.5rem; /* Revert heading size for smaller screens */
+  }
+
+  .description {
+    font-size: 1rem; /* Revert description size for smaller screens */
+  }
+
+.part2 {
+  position: relative;
+  width: 40%;
+  height: 350px;
+  right: 6%; 
+  background: black; /* Match the webpage background color */
+  z-index: -1;
+  overflow: hidden;
+  border: none;
+  box-shadow: inset 0 0 250px 85px black; /* Enhanced inward shadow */
+}
+
+.part2 video {
+  width: 90%;
+  height: 90%;
+  object-fit: cover;
+  position: absolute;
+  filter: brightness(0.75); /* Adjust brightness for better visibility */
+  z-index: 1;
+}
+
+.image-gradient {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 50%;
+  height: 100%;
+  opacity: 0.5;
+  z-index: 2;
+}
+
+/* TABLET RESPONSIVE */
+@media (max-width: 1024px) {
+  header {
+    padding: 1rem 0.5rem; /* Reduced padding for smaller screens */
+  }
+
+  .container {
+    margin-top: 85%; /* Reduced padding for smaller screens */
+  }
+
+  .robot-3D {
+    scale: 0.8;
+    top: -20%;
+    right: 2%;
+  }
+}
+@media (max-width: 768px) {
+  body {
+    padding-top: 0.5rem;
+  }
+
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0.5rem 2rem;
+  }
+
+  nav {
+    gap: 1.5rem;
+    margin-left: 0;
+  }
+
+  .logo {
+    font-size: 2.5rem;
+  }
+
+  main {
+    padding-left: 4%;
+    padding-top: 5rem;
+  }
+
+  .content h1 {
+    font-size: 2rem;
+  }
+
+  .description {
+    font-size: 0.9rem;
+  }
+
+  .buttons {
+    flex-direction: row;
+    gap: 1rem;
+  }
+
+  .tag-box {
+    width: 16rem;
+    height: 2.2rem;
+  }
+
+  .tag {
+    font-size: 1.5rem;
+  }
+}
+
+/* Mobile Responsive Styles */
+@media (max-width: 480px) {
+  header {
+    padding: 0.5rem 1rem;
+  }
+
+  .logo {
+    font-size: 2rem;
+  }
+
+  nav {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  main {
+    padding-left: 2%;
+    padding-top: 4rem;
+  }
+
+  .content h1 {
+    font-size: 1.8rem;
+  }
+
+  .description {
+    font-size: 0.8rem;
+  }
+
+  .buttons {
+    flex-direction: row;
+    gap: 0.8rem;
+  }
+
+  .tag-box {
+    width: 14rem;
+    height: 2rem;
+  }
+
+  .tag {
+    font-size: 1.3rem;
+  }
+
+  .profile-container {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+
+  .profile-container::before {
+    padding: 3px;
+  }
+
+  .profile-image {
+    width: 85%;
+    height: 85%;
+  }
+}
+
+/* Dark/Light mode toggle button styles */
+#modeToggle {
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+#modeToggle:hover {
+  background: linear-gradient(45deg, #007fff, #ff007f);
+  color: #fff;
+}
+
+/* Light mode styles */
+body.light-mode {
+  background: #f5f5f5;
+  color: #222;
+}
+
+body.light-mode .profile-container {
+  background: #fff;
+}
+
+body.light-mode nav a {
+  color: #222;
+}
+
+body.light-mode .description {
+  color: #555;
+}
+
+body.light-mode .linkedIN,
+body.light-mode .get-btn {
+  background-color: #e0e0e0;
+  color: #222;
+  border-color: #ccc;
+}
+
+body.light-mode .linkedIN:hover,
+body.light-mode .get-btn:hover {
+  background-color: #ccc;
+  color: #000;
+}
